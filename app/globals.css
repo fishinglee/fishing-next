@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Colors */
+  --color-primary: #4ade80;
+  --color-primary-dark: #22c55e;
+  --color-accent: #38bdf8;
+  --color-background-dark: #0f172a;
+  --color-night-water-top: #1e293b;
+  --color-night-water-bot: #020617;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Fonts */
+  --font-display: "Work Sans", sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Reflection Position Setting */
+  --reflection-pos: -200px;
+  --reflection-bob-pos: calc(var(--reflection-pos) - 5px);
+
+  /* Animations */
+  --animate-sway: sway 5s ease-in-out infinite;
+  --animate-bob: bob 3s ease-in-out infinite;
+  --animate-bob-reflect: bob-reflect 3s ease-in-out infinite;
+  --animate-sink: sink 2.5s ease-in-out;
+  --animate-rise: rise 2.5s ease-in-out;
+  --animate-cast-in: cast-in 3s ease-out forwards;
+  --animate-cast-in-reflect: cast-in-reflect 3s ease-out forwards;
+  --animate-ping-slow: ripple-fade 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-ping-slower: ripple-fade 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes sway {
+
+    0%,
+    100% {
+      transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+      transform: translateX(2px) rotate(1deg);
+    }
+
+    75% {
+      transform: translateX(-2px) rotate(-1deg);
+    }
+  }
+
+  @keyframes bob {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(5px);
+    }
+  }
+
+  @keyframes bob-reflect {
+
+    0%,
+    100% {
+      transform: translateY(var(--reflection-pos));
+    }
+
+    50% {
+      transform: translateY(var(--reflection-bob-pos));
+    }
+  }
+
+  @keyframes sink {
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(100px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes rise {
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-60px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes cast-in {
+    0% {
+      transform: translateY(-200px);
+    }
+
+    60% {
+      transform: translateY(10px);
+    }
+
+    80% {
+      transform: translateY(-5px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes cast-in-reflect {
+    0% {
+      transform: translateY(200px);
+    }
+
+    60% {
+      transform: translateY(calc(var(--reflection-pos) - 10px));
+    }
+
+    80% {
+      transform: translateY(calc(var(--reflection-pos) + 5px));
+    }
+
+    100% {
+      transform: translateY(var(--reflection-pos));
+    }
+  }
+
+  @keyframes ripple-fade {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+
+    100% {
+      transform: scale(2.5);
+      opacity: 0.15;
+    }
   }
 }
 
+/* Custom Utilities */
+.vector-sky {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 70%, #334155 100%);
+}
+
+.vector-water {
+  background: linear-gradient(180deg, #1e293b 0%, #020617 100%);
+}
+
+.glass-modern {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-hook-gradient {
+  background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%);
+}
+
+.mountain-silhouette {
+  background: #1e293b;
+  clip-path: ellipse(65% 100% at 50% 100%);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background-dark);
+  font-family: var(--font-display);
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  color: white;
 }
