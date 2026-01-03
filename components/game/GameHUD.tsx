@@ -2,12 +2,33 @@
 
 import { cn } from "@/lib/utils";
 
+import { GameStatus } from "@/lib/constants";
+
 interface GameHUDProps {
+    gameStatus: GameStatus;
     onHookClick: () => void;
     onDebugInput: (val: number) => void;
 }
 
-export function GameHUD({ onHookClick, onDebugInput }: GameHUDProps) {
+export function GameHUD({ gameStatus, onHookClick, onDebugInput }: GameHUDProps) {
+    const isCastMode = gameStatus === 'READY' || gameStatus === 'HIT' || gameStatus === 'MISS' || gameStatus === 'BROKEN';
+
+    // Status Text
+    let statusText = "Ready to Cast";
+    if (gameStatus === 'CASTING') statusText = "Casting...";
+    if (gameStatus === 'FISHING') statusText = "Waiting for bite...";
+    if (gameStatus === 'BITE') statusText = "BITE! HOOK NOW!";
+    if (gameStatus === 'HIT') statusText = "Catch Success!";
+    if (gameStatus === 'MISS') statusText = "Missed...";
+
+    // Button Style
+    const buttonGradient = isCastMode
+        ? "bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_8px_40px_rgba(34,211,238,0.3)]"
+        : "btn-hook-gradient shadow-[0_8px_40px_rgba(34,197,94,0.3)]";
+
+    const buttonIcon = isCastMode ? "waves" : "touch_app";
+    const buttonLabel = isCastMode ? "CAST" : "HOOK";
+
     return (
         <>
             {/* Top Bar */}
@@ -52,16 +73,16 @@ export function GameHUD({ onHookClick, onDebugInput }: GameHUDProps) {
             <div className="absolute top-[65%] left-1/2 -translate-x-1/2">
                 <div className="px-4 py-1.5 rounded-full glass-modern text-white/90 text-xs font-medium tracking-wide flex items-center gap-2 shadow-lg border border-primary/20">
                     <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${gameStatus === 'BITE' ? 'bg-red-500' : 'bg-primary'}`}></span>
+                        <span className={`relative inline-flex rounded-full h-2 w-2 ${gameStatus === 'BITE' ? 'bg-red-500' : 'bg-primary'}`}></span>
                     </span>
-                    Waiting for bite...
+                    {statusText}
                 </div>
             </div>
 
             {/* Controls */}
             <div className="relative z-30 w-full flex flex-col gap-6 pb-16 px-6">
-                <div className="flex justify-between items-end px-2">
+                <div className="flex justify-between items-center px-2">
                     <div className="flex flex-col gap-2">
                         <button className="glass-modern flex items-center gap-3 pl-2 pr-4 py-2 rounded-2xl hover:bg-white/5 active:scale-95 transition-all group border border-white/10">
                             <div className="bg-gradient-to-br from-amber-300 to-orange-500 rounded-xl p-1.5 text-black shadow-inner">
@@ -71,7 +92,7 @@ export function GameHUD({ onHookClick, onDebugInput }: GameHUDProps) {
                             </div>
                             <div className="flex flex-col items-start">
                                 <span className="text-xs font-bold text-white group-hover:text-primary transition-colors">
-                                    Paste Bait
+                                    Tackle Box
                                 </span>
                                 <span className="text-[10px] text-white/50">24 Qty</span>
                             </div>
@@ -97,19 +118,22 @@ export function GameHUD({ onHookClick, onDebugInput }: GameHUDProps) {
                     </button>
                     <button
                         onClick={onHookClick}
-                        className="relative group flex items-center justify-center size-24 rounded-full btn-hook-gradient shadow-[0_8px_40px_rgba(34,197,94,0.3)] active:scale-95 active:shadow-none transition-all duration-200 border-4 border-white/10 z-20 cursor-pointer"
+                        className={cn(
+                            "relative group flex items-center justify-center size-24 rounded-full transition-all duration-200 border-4 border-white/10 z-20 cursor-pointer active:scale-95 active:shadow-none",
+                            buttonGradient
+                        )}
                     >
                         <div className="absolute inset-1 rounded-full border border-white/20"></div>
                         <div className="flex flex-col items-center z-10 -mt-1">
                             <span className="material-symbols-outlined text-white text-[40px] drop-shadow-md group-active:scale-90 transition-transform">
-                                touch_app
+                                {buttonIcon}
                             </span>
                             <span className="text-[11px] font-black uppercase tracking-widest text-white/90 drop-shadow mt-1">
-                                Hook
+                                {buttonLabel}
                             </span>
                         </div>
                         <div className="absolute top-0 inset-x-0 h-[45%] bg-gradient-to-b from-white/20 to-transparent rounded-t-full pointer-events-none"></div>
-                        <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-active:animate-ping"></div>
+                        <div className="absolute inset-0 rounded-full bg-white opacity-0 group-active:animate-ping"></div>
                     </button>
                     <button className="flex flex-col items-center justify-center size-14 rounded-2xl glass-modern text-white/60 hover:text-white hover:bg-white/10 active:scale-95 transition-all border border-white/5">
                         <span className="material-symbols-outlined text-[24px]">map</span>

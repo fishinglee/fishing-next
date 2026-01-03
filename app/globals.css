@@ -26,6 +26,7 @@
   --animate-cast-in-reflect: cast-in-reflect 3s ease-out forwards;
   --animate-ping-slow: ripple-fade 3s cubic-bezier(0, 0, 0.2, 1) infinite;
   --animate-ping-slower: ripple-fade 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-impact: ripple-impact 1.2s ease-out forwards;
 
   @keyframes sway {
 
@@ -140,6 +141,20 @@
     100% {
       transform: scale(2.5);
       opacity: 0.15;
+    }
+  }
+
+  @keyframes ripple-impact {
+    0% {
+      transform: scale(0.5);
+      opacity: 0.7;
+      border-width: 1px;
+    }
+
+    100% {
+      transform: scale(3.5);
+      opacity: 0;
+      border-width: 0px;
     }
   }
 }
