@@ -13,12 +13,17 @@
   --font-display: "Work Sans", sans-serif;
 
   /* Reflection Position Setting */
+  --float-pos: 180px;
+  --float-bob-pos: calc(var(--float-pos) + 5px);
   --reflection-pos: -200px;
+  --reflection-bob-pos: calc(var(--reflection-pos) - 5px);
   --reflection-bob-pos: calc(var(--reflection-pos) - 5px);
 
   /* Animations */
   --animate-sway: sway 5s ease-in-out infinite;
+  --animate-sway-reflect: sway-reflect 5s ease-in-out infinite;
   --animate-bob: bob 3s ease-in-out infinite;
+  --animate-bob-float: bob-float 3s ease-in-out infinite;
   --animate-bob-reflect: bob-reflect 3s ease-in-out infinite;
   --animate-sink: sink 2.5s ease-in-out;
   --animate-rise: rise 2.5s ease-in-out;
@@ -36,11 +41,27 @@
     }
 
     25% {
-      transform: translateX(2px) rotate(1deg);
+      transform: translateX(0.5px) rotate(0.25deg);
     }
 
     75% {
-      transform: translateX(-2px) rotate(-1deg);
+      transform: translateX(-0.5px) rotate(-0.25deg);
+    }
+  }
+
+  @keyframes sway-reflect {
+
+    0%,
+    100% {
+      transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+      transform: translateX(0.5px) rotate(-0.25deg);
+    }
+
+    75% {
+      transform: translateX(-0.5px) rotate(0.25deg);
     }
   }
 
@@ -53,6 +74,18 @@
 
     50% {
       transform: translateY(5px);
+    }
+  }
+
+  @keyframes bob-float {
+
+    0%,
+    100% {
+      transform: translateY(var(--float-pos));
+    }
+
+    50% {
+      transform: translateY(var(--float-bob-pos));
     }
   }
 

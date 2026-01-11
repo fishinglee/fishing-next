@@ -94,7 +94,8 @@ export const BITE_PATTERNS: BitePattern[] = [
         name: "Catfish Drift",
         steps: [
             { y: 18, duration: 1000, ease: "ease-in" },
-            { y: 35, duration: 4000, ease: "linear" }
+            { y: 35, duration: 3000, ease: "linear" },
+            { y: 0, duration: 2000, ease: "ease-out" }
         ],
         horizontalDrift: 150,
         catchWindows: [{ start: 1000, end: 4000 }] // While drifting
@@ -151,20 +152,21 @@ export interface CastPhase {
 }
 
 export const CAST_CONFIG = {
-    startHeight: -600, // Starting height (pixels above resting)
+    startHeight: -500, // Starting height (pixels above resting)
     phases: [
         // Phase 1: Fast Drop to Surface (Body at water level)
         // -80 puts the body center at water level
-        { y: -80, duration: 1000, ease: "cubic-bezier(0.5, 0, 1, 1)" },
+        { y: -128, duration: 700, ease: "cubic-bezier(0.5, 0, 1, 1)" },
 
         // Phase 2: Buoyancy Bob (Bobbing at surface)
-        { y: -60, duration: 150, ease: "ease-out" },
-        { y: -80, duration: 150, ease: "ease-in" },
-        { y: -70, duration: 150, ease: "ease-out" },
-        { y: -80, duration: 150, ease: "ease-in" },
-        { y: -70, duration: 800, ease: "ease-in" },
+        { y: -142, duration: 150, ease: "ease-out" },
+        { y: -132, duration: 150, ease: "ease-in" },
+        { y: -138, duration: 150, ease: "ease-out" },
+        { y: -135, duration: 300, ease: "ease-in" },
 
         // Phase 3: Slow Settle (Sinking to fishing depth 0)
-        { y: 0, duration: 2000, ease: "ease-out" }
+        { y: 0, duration: 2000, ease: "ease-out" },
+        { y: 3, duration: 150, ease: "ease-in" },
+        { y: 0, duration: 150, ease: "ease-out" }
     ]
 };

@@ -9,7 +9,7 @@ export function Background() {
                 }}
             ></div>
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 w-full h-[65%] vector-sky">
+                <div className="absolute top-0 w-full h-[70%] vector-sky">
                     <div className="absolute top-10 left-8 w-0.5 h-0.5 bg-white rounded-full opacity-60"></div>
                     <div className="absolute top-20 right-12 w-0.5 h-0.5 bg-white rounded-full opacity-40"></div>
                     <div className="absolute top-32 left-1/3 w-1 h-1 bg-white rounded-full opacity-70"></div>
@@ -17,7 +17,7 @@ export function Background() {
                     <div className="absolute bottom-0 left-[-20%] w-[80%] h-32 bg-slate-800/80 rounded-tr-[100%] rounded-tl-[50%]"></div>
                     <div className="absolute bottom-0 right-[-10%] w-[90%] h-24 bg-slate-700/80 rounded-tl-[120%] rounded-tr-[20%]"></div>
                 </div>
-                <div className="absolute bottom-0 w-full h-[35%] vector-water">
+                <div className="absolute bottom-0 w-full h-[30%] vector-water">
                     <div className="absolute top-0 w-full h-[1px] bg-white/10"></div>
                     <div className="absolute left-1/2 -translate-x-1/2 top-0 w-32 h-full bg-primary/5 blur-xl"></div>
                 </div>

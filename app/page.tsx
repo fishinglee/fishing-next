@@ -186,9 +186,10 @@ export default function Home() {
           gameStatus={gameStatus}
           onHookClick={handleHookClick}
           onDebugInput={(val) => setDebugBiteIndex(val)}
+          floatSystemRef={floatSystemRef}
         />
 
-        <div className="absolute inset-x-0 top-[105px] bottom-[36%] pointer-events-none flex flex-col justify-center overflow-hidden">
+        <div className="absolute inset-x-0 top-[105px] bottom-[30%] pointer-events-none flex flex-col justify-center overflow-hidden">
           <FloatSystem ref={floatSystemRef} />
         </div>
       </div>
