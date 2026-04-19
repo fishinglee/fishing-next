@@ -64,7 +64,7 @@ export default function Home() {
     setGameStatus('BITE');
     setBiteStartTime(Date.now());
     setActivePattern(pattern);
-    setGameMessage("입질이 온다...!");
+    setGameMessage("물고기 입질...!");
 
     floatSystemRef.current?.playBite(patternIndex);
 
